@@ -58,16 +58,16 @@ import dynesty
 
 # The parameter file
 
-We need several things to run a fit.  These include 
+We need several things to run a fit.  These include
   1. A `model` object (to store and translate parameters and priors of our model)
   2. A stellar population synthesis object (to predict spectra from parameters)
   3. An `obs` dictionary (with the data we intend to fit)
-  
+
 It can also useful to collect the meta-parameters contolling how the fit is done in a ``run_params`` dictionary. We will do that as we go along.  We will also encapsulate each step of the setup in a series of `load_()` functions.  Normally these would be written in your *parameter file*
 
 ## The model object
 
-We need a set of model parameters, which will **define** the model we are tying to fit to the data.  The model object stores the parameters that are used by the SPS object to build a spectrum, as well as infomation about which parameters are to be varied during fitting, and priors on those parameters.  It efficiently converts between a vector of parameter values (the `theta` attribute) used by the MCMC samplers or optimizers and the dictionary of parameter names and values (the `params` attribute) that can be passed to the sps objects' `get_spectrum()` method.
+We need a set of model parameters, which will **define** the model we are tying to fit to the data.  The model object stores the parameters that are used by the SPS object to build a spectrum, as well as information about which parameters are to be varied during fitting, and priors on those parameters.  It efficiently converts between a vector of parameter values (the `theta` attribute) used by the MCMC samplers or optimizers and the dictionary of parameter names and values (the `params` attribute) that can be passed to the sps objects' `get_spectrum()` method.
 
 To create the model object we need a list or dictionary of model parameters and some infomation about them.  Each parameter must a have a name, a length (vector parameters are possible), an initial value, and must be specified as either a free parameter or a fixed parameter.  If it is a free parameter it needs a prior as well, which we will get from the `priors` module.
 
@@ -121,26 +121,26 @@ It looks like the `"parametric_sfh"` set will do most of what we want.  Let's lo
 TemplateLibrary.describe("parametric_sfh")
 ```
 
-    Free Parameters: (name: prior) 
+    Free Parameters: (name: prior)
     -----------
       mass: <class 'prospect.models.priors.LogUniform'>(mini=100000000.0,maxi=1000000000000.0)
       logzsol: <class 'prospect.models.priors.TopHat'>(mini=-2,maxi=0.19)
       dust2: <class 'prospect.models.priors.TopHat'>(mini=0.0,maxi=2.0)
       tage: <class 'prospect.models.priors.TopHat'>(mini=0.001,maxi=13.8)
       tau: <class 'prospect.models.priors.LogUniform'>(mini=0.1,maxi=30)
-    
-    Fixed Parameters: (name: value [, depends_on]) 
+
+    Fixed Parameters: (name: value [, depends_on])
     -----------
-      zred: 0.1 
-      sfh: 4 
-      imf_type: 2 
-      dust_type: 0 
+      zred: 0.1
+      sfh: 4
+      imf_type: 2
+      dust_type: 0
 
 
 That looks pretty good. It has 5 free parameters:
 - stellar mass *formed* $M_\star$,
-- metallicity $\log Z/Z_\odot$, 
-- age $t$ of the galaxy 
+- metallicity $\log Z/Z_\odot$,
+- age $t$ of the galaxy
 - star formation timescale $\tau$ for an exponentially declining star formation history (SFH), and
 - dust attenuation of old stellar populations $A_V$.
 
@@ -152,17 +152,17 @@ We'll use the `"parametric_sfh"` set and adjust a couple of the priors, add a fe
 
 
 ```python
-def load_model(zred=0.1, fixed_metallicity=None, add_neb=False, 
+def load_model(zred=0.1, fixed_metallicity=None, add_neb=False,
                **extras):
     """Instantiate and return a ProspectorParams model subclass.
-    
+
     :param zred: (optional, default: 0.1)
         The (fixed) redshift of the model
-        
+
     :param fixed_metallicity: (optional)
         If provided, fix the metallicity (log(Z/Z_\sun)) to this value.  
         Otherwise the metallicty is a free parameter.
-        
+
     :param add_neb: (optional, default: False)
         If True, turn on nebular emission and add relevant parameters to the model
     """
@@ -170,27 +170,27 @@ def load_model(zred=0.1, fixed_metallicity=None, add_neb=False,
     from prospect.models.templates import TemplateLibrary
 
     model_params = TemplateLibrary["parametric_sfh"]
-        
+
     # Adjust priors
     model_params["logzsol"]["prior"] = priors.TopHat(mini=-1.0, maxi=0.1)
     model_params["tau"]["prior"] = priors.LogUniform(mini=1e-1, maxi=1e1)
     model_params["mass"]["prior"] = priors.LogUniform(mini=1e9, maxi=1e11)
     model_params["tage"]["prior"] = priors.TopHat(mini=1, maxi=13.6)
-    
+
     # Add burst parameters (fixed to zero be default)
     model_params.update(TemplateLibrary["burst_sfh"])
     # Add dust emission parameters (fixed)
     model_params.update(TemplateLibrary["dust_emission"])
- 
+
     # Add nebular emission parameters and turn nebular emission on
     if add_neb:
         model_params.update(TemplateLibrary["nebular"])
-    
+
     if fixed_metallicity is not None:
         # make it a fixed parameter
         model_params["logzsol"]["isfree"] = False
         #And use value supplied by fixed_metallicity keyword
-        model_params["logzsol"]['init'] = fixed_metallicity 
+        model_params["logzsol"]['init'] = fixed_metallicity
 
     if zred is not None:
         # make sure zred is fixed
@@ -227,10 +227,10 @@ def load_sps(zcontinuous=1, **extras):
     """Instantiate and return the Stellar Population Synthesis object.
 
     :param zcontinuous: (default: 1)
-        python-fsps parameter controlling how metallicity interpolation of the 
+        python-fsps parameter controlling how metallicity interpolation of the
         SSPs is acheived.  A value of `1` is recommended.
         * 0: use discrete indices (controlled by parameter "zmet")
-        * 1: linearly interpolate in log Z/Z_\sun to the target 
+        * 1: linearly interpolate in log Z/Z_\sun to the target
              metallicity (the parameter "logzsol".)
         * 2: convolve with a metallicity distribution function at each age.  
              The MDF is controlled by the parameter "pmetals"
@@ -267,9 +267,9 @@ def load_obs(snr=10.0, add_noise=True, filterset=["sdss_g0", "sdss_r0"],
 
     :param add_noise: (optional, boolean, default: True)
         If True, add a realization of the noise to the mock spectrum
-        
+
     :param filterset:
-        A list of `sedpy` filter names.  Mock photometry will be generated 
+        A list of `sedpy` filter names.  Mock photometry will be generated
         for these filters.
     """
     # We'll put the mock data in this dictionary, just as we would for real
@@ -277,9 +277,9 @@ def load_obs(snr=10.0, add_noise=True, filterset=["sdss_g0", "sdss_r0"],
     # spectroscopy) in which to generate mock data.
     mock = {}
     mock['wavelength'] = None # No spectrum
-    # Here we instantiate the `Filter()` objects using methods in `sedpy`, 
-    # and put the resulting list of Filter object in the "filters" key 
-    # of the obs dictionary.  These are used to convert a model spectrum 
+    # Here we instantiate the `Filter()` objects using methods in `sedpy`,
+    # and put the resulting list of Filter object in the "filters" key
+    # of the obs dictionary.  These are used to convert a model spectrum
     # into broadband fluxes.
     from sedpy.observate import load_filters
     mock['filters'] = load_filters(filterset)
@@ -319,7 +319,7 @@ def load_obs(snr=10.0, add_noise=True, filterset=["sdss_g0", "sdss_r0"],
     # No spectrum
     mock['wavelength'] = None
     mock["spectrum"] = None
-    
+
     return mock
 
 ```
@@ -419,10 +419,10 @@ print("\nFree Parameters:\n  {}".format(model.free_params))
       nested_weight_kwargs = {'pfrac': 1.0}
       nested_stop_kwargs = {'post_thresh': 0.1}
       outfile = demo_nested
-    
+
     Filters:
       [<class 'sedpy.observate.Filter'>(galex_FUV), <class 'sedpy.observate.Filter'>(galex_NUV), <class 'sedpy.observate.Filter'>(sdss_u0), <class 'sedpy.observate.Filter'>(sdss_g0), <class 'sedpy.observate.Filter'>(sdss_r0), <class 'sedpy.observate.Filter'>(sdss_i0), <class 'sedpy.observate.Filter'>(sdss_z0), <class 'sedpy.observate.Filter'>(twomass_J), <class 'sedpy.observate.Filter'>(twomass_H), <class 'sedpy.observate.Filter'>(twomass_Ks), <class 'sedpy.observate.Filter'>(spitzer_irac_ch1), <class 'sedpy.observate.Filter'>(spitzer_irac_ch2)]
-    
+
     Free Parameters:
       ['mass', 'logzsol', 'dust2', 'tage', 'tau']
 
@@ -457,16 +457,16 @@ ymin, ymax = temp.min()*0.8, temp.max()/0.4
 figure(figsize=(16,8))
 
 # plot model + data
-loglog(wspec, initial_spec, label='Model spectrum', 
+loglog(wspec, initial_spec, label='Model spectrum',
        lw=0.7, color='navy', alpha=0.7)
-errorbar(wphot, initial_phot, label='Model photometry', 
+errorbar(wphot, initial_phot, label='Model photometry',
          marker='s',markersize=10, alpha=0.8, ls='', lw=3,
-         markerfacecolor='none', markeredgecolor='blue', 
+         markerfacecolor='none', markeredgecolor='blue',
          markeredgewidth=3)
-errorbar(wphot, obs['maggies'], yerr=obs['maggies_unc'], 
+errorbar(wphot, obs['maggies'], yerr=obs['maggies_unc'],
          label='Observed photometry',
          marker='o', markersize=10, alpha=0.8, ls='', lw=3,
-         ecolor='red', markerfacecolor='none', markeredgecolor='red', 
+         ecolor='red', markerfacecolor='none', markeredgecolor='red',
          markeredgewidth=3)
 title(title_text)
 
@@ -532,24 +532,24 @@ nested = True
 verbose = False
 def lnprobfn(theta, nested=False, verbose=verbose):
     """
-    Given a parameter vector, a dictionary of observational data 
-    a model object, and an sps object, return the ln of the posterior. 
-    This requires that an sps object (and if using spectra 
+    Given a parameter vector, a dictionary of observational data
+    a model object, and an sps object, return the ln of the posterior.
+    This requires that an sps object (and if using spectra
     and gaussian processes, a GP object) be instantiated.
     """
 
     # Calculate prior probability and return -inf if not within prior
-    # Also if doing nested sampling, do not include the basic priors, 
+    # Also if doing nested sampling, do not include the basic priors,
     # since the drawing method already includes the prior probability
     lnp_prior = model.prior_product(theta, nested=nested)
     if not np.isfinite(lnp_prior):
         return -np.infty
-        
+
     # Generate "mean" model
     t1 = time.time()
     spec, phot, mfrac = model.mean_model(theta, obs, sps=sps)
     d1 = time.time() - t1
- 
+
     # Calculate likelihoods
     t2 = time.time()
     lnp_spec = lnlike_spec(spec, obs=obs)
@@ -633,7 +633,7 @@ run_params["outfile"] = "demo_nested"
 outroot = "{0}_{1}".format(run_params['outfile'], int(time.time()))
 hfile = outroot + '_mcmc.h5'
 print("Writing to {}".format(hfile))
-write_results.write_hdf5(hfile, run_params, model, obs, out, None, 
+write_results.write_hdf5(hfile, run_params, model, obs, out, None,
                          tsample=duration)
 
 # The code below can be used to write python pickles (like IDL save files) to disk.  
@@ -685,7 +685,7 @@ Let's get the vector of input parameters:
 
 
 ```python
-theta_input = np.squeeze(np.array([obs["mock_params"][p] 
+theta_input = np.squeeze(np.array([obs["mock_params"][p]
                                    for p in mod.theta_labels()]))
 print("Mock parameters:", zip(mod.free_params, theta_input))
 ```
@@ -714,7 +714,7 @@ Our samples more generally can be shown using a corner/triangle plot.  The `subc
 imax = np.argmax(res['lnprobability'])
 theta_max = res['chain'][imax, :].copy()
 print('MAP value: {}'.format(theta_max))
-# We throuw out the first 500 samples because they are (usually) very low probability 
+# We throuw out the first 500 samples because they are (usually) very low probability
 # and can throw off the plotting algorithms
 cornerfig = subcorner(res, start=500, thin=1, truths=theta_input,
                       fig=subplots(5,5,figsize=(27,27))[0])
@@ -737,7 +737,7 @@ cornerfig = subcorner(res, start=500, thin=1, truths=theta_input,
 
     ModuleNotFoundError: No module named 'corner'
 
-    
+
     During handling of the above exception, another exception occurred:
 
 
@@ -747,13 +747,13 @@ cornerfig = subcorner(res, start=500, thin=1, truths=theta_input,
           6 # and can throw off the plotting algorithms
           7 cornerfig = subcorner(res, start=500, thin=1, truths=theta_input,
     ----> 8                       fig=subplots(5,5,figsize=(27,27))[0])
-    
+
 
     ~/Documents/my_virt_envs/phys_py3/lib/python3.7/site-packages/prospect-0.2-py3.7.egg/prospect/io/read_results.py in subcorner(results, showpars, truths, start, thin, chains, logify, **kwargs)
         408         import corner as triangle
         409     except(ImportError):
     --> 410         import triangle
-        411 
+        411
         412     # pull out the parameter names and flatten the thinned chains
 
 
@@ -769,9 +769,9 @@ Finally, let's just take a look at a random model drawn from our chains, and at 
 
 
 ```python
-# Randomly chosen parameters from the chain. Note that we have to weight 
+# Randomly chosen parameters from the chain. Note that we have to weight
 # our random choice by the nested sampling weights
-sample_index = np.random.choice(len(res["chain"]), 
+sample_index = np.random.choice(len(res["chain"]),
                                 p=res["weights"])
 theta = res['chain'][sample_index, :]
 
@@ -805,17 +805,17 @@ loglog(wspec, mspec_map, label='Model spectrum (MAP)',
 #loglog(wspec, mspec_truth, label='Mock spectrum',
 #       lw=0.7, color='green', alpha=0.7)
 errorbar(wphot, mphot, label='Model photometry (random draw)',
-         marker='s', markersize=10, alpha=0.8, ls='', lw=3, 
-         markerfacecolor='none', markeredgecolor='blue', 
+         marker='s', markersize=10, alpha=0.8, ls='', lw=3,
+         markerfacecolor='none', markeredgecolor='blue',
          markeredgewidth=3)
 errorbar(wphot, mphot_map, label='Model photometry (MAP)',
-         marker='s', markersize=10, alpha=0.8, ls='', lw=3, 
-         markerfacecolor='none', markeredgecolor='green', 
+         marker='s', markersize=10, alpha=0.8, ls='', lw=3,
+         markerfacecolor='none', markeredgecolor='green',
          markeredgewidth=3)
-errorbar(wphot, obs['maggies'], yerr=obs['maggies_unc'], 
-         label='Observed photometry', ecolor='red', 
-         marker='o', markersize=10, ls='', lw=3, alpha=0.8, 
-         markerfacecolor='none', markeredgecolor='red', 
+errorbar(wphot, obs['maggies'], yerr=obs['maggies_unc'],
+         label='Observed photometry', ecolor='red',
+         marker='o', markersize=10, ls='', lw=3, alpha=0.8,
+         markerfacecolor='none', markeredgecolor='red',
          markeredgewidth=3)
 
 # plot transmission curves
