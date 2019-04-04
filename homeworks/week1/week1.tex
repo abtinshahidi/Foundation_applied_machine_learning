@@ -1,0 +1,136 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{PHYS 243}
+\newcommand\hwnumber{1}                  % <-- homework number
+\newcommand\NetIDa{TA: Abtin Shahidi}           % <-- NetID of person #1
+%\newcommand\NetIDb{netid12038}           % <-- NetID of person #2 (Comment this line out for problem sets)
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Homework \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+Welcome again to the \textbf{Foundation of applied machine learning}! 
+
+\section*{Problem 1: Python programming}
+This is a problem to check your coding skills! So \textbf{do not use} fancy modules and scripts!  
+
+\subsection*{Production of Fibonacci Sequence!}
+I have been assigned to write a function that takes an integer value $n$, where $n\in [0,1,2,3,...]$ and return the $n^th$ value in Fibonacci sequence. Since, I am very lazy I just wrote the function \textbf{recursively} as you can see below. Another person, who was assigned to do the same thing, wrote the function with \textsc{for loops} and claims his code is much faster!! 
+
+    \lstset{caption={Recursive Fibonacci Function}}
+    \lstset{label={lst:alg1}}
+     \begin{lstlisting}[style = Python]
+     def Fib_rec(n=0):
+     if n==0:
+         return 1
+     elif n==1:
+         return 1
+     else:
+         return Fib_rec(n-1)+Fib_rec(n-2)
+    \end{lstlisting}
+
+
+\begin{enumerate}
+  \item
+   \textbf{Part 1:} Rewrite the function with for loop.
+  \item
+   \textbf{Part 2:} Which function is actually faster? (Explain without running the codes)
+  \item
+   \textbf{Part 3:} Write a code to time the \textbf{average} time for $k$ times function call. A function that takes three arguments (function to time (Fib\_rec), input of the function ($n$), number of runs($k$)) and run the Fib\_rec function $k$ times for the input of $n$ and returns the average time.
+   \textit{\textbf{Tip:} You can use the time module in the python:}
+   \lstset{caption={importing time modules}}
+   \lstset{label={lst:alg1}}
+    \begin{lstlisting}[style = Python]
+    import time
+    # if you run this, the current time in (s) will be recorded in  x
+    x=time.time() 
+    \end{lstlisting}
+  \item
+   \textbf{Part 4:} Make a plot in which the $x$-axis is the value of the input function $n$ and the $y$-axis is the average time (output of the previous function), for both recursive and non-recursive Fibonacci. (Both in the same plot; also use matplotlib package for making the plots) 
+\end{enumerate}
+
+
+\section*{Problem 2: Linear Algebra}
+
+Given the Matrix below answer the questions:
+
+\begin{equation*}
+   M = \begin{pmatrix} 
+1 & -4 & 2 \\
+-4 & 1 & -2 \\
+2 & -2 & -2 
+\end{pmatrix}
+\end{equation*}
+
+
+    \item \textbf{Part 1:} Find the determinant, transpose, inverse(if exist) for $M$.
+
+    \item \textbf{Part 2:} Find the eigenvalues and eigenvectors for $M$. 
+      
+    \item \textbf{Part 3:} Find the Gradient if the $\nabla_A f(A)$ for the following:
+   \begin{equation*}
+	A=\begin{pmatrix} 
+	x_{11} & x_{12} & x_{13} \\
+	x_{21} & x_{22} & x_{23} \\
+	x_{31} & x_{32} & x_{33} 
+	\end{pmatrix}
+  \end{equation*}
+  \begin{equation*}
+   f(A)= x_{11}^2 x_{22} x_{23} + x_{11}x_{12}x_{13}x_{31}-x_{33}^2 x_{32} x_{21}
+   \end{equation*}
+
+	\item \textbf{Part 4:} Find the Hessian Matrix for:
+   \begin{equation*}
+	g(x,y,z)=x^3y+yz\sin(x)+xy^2z^5
+  \end{equation*}
+   	
+\section*{Problem 3: Machine Learning}
+ \item \textbf{Part 1:} Explain the difference between validation and test samples. 
+
+ \item \textbf{Part 2:} Explain the difference between supervised and unsupervised learning algorithm. 
+
+
+\end{document}
