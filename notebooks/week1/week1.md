@@ -123,7 +123,7 @@ pip3 freeze
 pip3 freeze > requirement.txt
 ```
 
-
+<br/>
 
 # **Python as a simple calculator!!**
 
@@ -226,7 +226,7 @@ x+y
 
     57
 
-
+<br/>
 
 # **Control Flow Tools**
 
@@ -303,6 +303,7 @@ for i in list_1:
 
 ### <span style="color:green">**More info:** </span>: [https://docs.python.org/3/tutorial/controlflow.html](https://docs.python.org/3/tutorial/controlflow.html)
 
+<br/>
 
 # **Built-in data structures**
 
@@ -748,7 +749,7 @@ dict_2["first_dict"]['x']
 
     2
 
-
+<br/>
 
 # **Importing packages and modules**
 
@@ -817,7 +818,7 @@ linspace(1,10,20)
             8.10526316,  8.57894737,  9.05263158,  9.52631579, 10.        ])
 
 
-
+<br/>
 
 # Some Useful packages and modules:
 
