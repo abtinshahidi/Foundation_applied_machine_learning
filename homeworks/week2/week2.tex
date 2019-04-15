@@ -1,0 +1,93 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{PHYS 243}
+\newcommand\hwnumber{2}                  % <-- homework number
+\newcommand\NetIDa{TA: Abtin Shahidi}           % <-- NetID of person #1
+%\newcommand\NetIDb{netid12038}           % <-- NetID of person #2 (Comment this line out for problem sets)
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+% \lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Homework \hwnumber}}
+\rhead{\course \\ Deadline:  04/20/2019, 11:59 pm}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section*{Problem 1: Find the distribution!}
+These are the data-set for the number of car accidents in the rush hour of a small city. You are assigned to predict the \textbf{number of car accidents in a given hour of the day}. You need to find the full probability distribution of this quantity. 
+\\
+
+Also, make sure to clearly \textbf{state the assumptions} you are making at each step.
+
+\begin{table}[htp]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+16 & 24 & 16 & 12 & 16 & 11 & 14 & 15 & 9 & 14 & 7 \\ \hline
+\end{tabular}
+\caption{The Number of Accident during rush hour}
+\end{table}
+
+
+\textit{\textbf{Tip:} You can/should make reasonable assumption about the data.} 
+
+
+\section*{Problem 2: Find the parameters!}
+Write a python function to find $\mu$ and $\sigma$:
+\begin{equation*}
+N(x|\mu,\sigma)=N(x|\mu_1,\sigma_1)N(x|\mu_2,\sigma_2)...N(x|\mu_N,\sigma_N)
+\end{equation*}
+
+In which $N$ is a Normal distribution:
+\begin{equation*}
+N(x|\mu,\sigma)=\frac{1}{\sqrt{2\pi \sigma^2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})
+\end{equation*}
+
+Your function should take two vectors: 
+\begin{equation*}
+\begin{array}[1]
+2 \vec{\mu} \textrm{\texttt{= numpy.array}}[\mu_1, \mu_2, ..., \mu_N] \\
+ \vec{\sigma} \textrm{\texttt{= numpy.array}}[\sigma_1, \sigma_2, ...,\sigma_N]
+\end{array}
+\end{equation*}
+
+And return $\mu$ and $\sigma$.
+\end{document}
