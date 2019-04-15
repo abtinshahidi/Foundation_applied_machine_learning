@@ -36,13 +36,12 @@
 % Edit these as appropriate
 \newcommand\course{PHYS 243}
 \newcommand\hwnumber{1}                  % <-- homework number
-\newcommand\NetIDa{TA: Abtin Shahidi}           % <-- NetID of person #1
-%\newcommand\NetIDb{netid12038}           % <-- NetID of person #2 (Comment this line out for problem sets)
+\newcommand\MyName{TA: Abtin Shahidi}           % <-- My name
 
 \pagestyle{fancyplain}
 \headheight 35pt
-\lhead{\NetIDa}
-\lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\lhead{\MyName}
+
 \chead{\textbf{\Large Homework \hwnumber}}
 \rhead{\course \\ \today}
 \lfoot{}
@@ -87,6 +86,14 @@ I have been assigned to write a function that takes an integer value $n$, where 
     import time
     # if you run this, the current time in (s) will be recorded in  x
     x=time.time() 
+    \end{lstlisting}
+    
+    \lstset{caption={Timer Function}}
+   \lstset{label={lst:alg3}}
+    \begin{lstlisting}[style = Python]
+    def timer(n, k, f=Fib_rec):
+    	<your code>
+    	return average_time
     \end{lstlisting}
   \item
    \textbf{Part 4:} Make a plot in which the $x$-axis is the value of the input function $n$ and the $y$-axis is the average time (output of the previous function), for both recursive and non-recursive Fibonacci. (Both in the same plot; also use matplotlib package for making the plots) 
