@@ -1,3 +1,15 @@
+---
+title: "Week 2"
+collection: teaching
+type: "Online/in-Person Graduate course"
+permalink: /teaching/2019-spring-foundation-machine-learning/week2
+venue: "University of California, Riverside, Department of Physics and Astronomy"
+date: 2019-03-03
+location: "Riverside, USA"
+---
+
+<script src="/home/abtin/Documents/personal_website/abtinshahidi.github.io/latex_hack/math-code.js"></script>
+
 
 # **The Foundation of Applied Machine Learning**
 ## Spring 2019
@@ -8,23 +20,23 @@
 ### Course webpage: [https://abtinshahidi.github.io/teaching/2019-spring-foundation-machine-learning](https://abtinshahidi.github.io/teaching/2019-spring-foundation-machine-learning)
 
 
-
+<hr>
 # **Week 2**
 
 ## Introduction to statistics:
 
-> “I couldn't claim that I was smarter than sixty-five other guys--but the average of sixty-five other guys, certainly!” 
+> “I couldn't claim that I was smarter than sixty-five other guys--but the average of sixty-five other guys, certainly!”
 >
 > -- <cite>*Richard P. Feynman*, Surely You're Joking, Mr. Feynman!</cite>
 
 
-### **Statistic** is a very broad subject of study, covering from data collection (designing surveys), organizing and preparing data, and making intrepetation and analysis on the data and at the end presenting and visualizing the crux of the analysis in the meaningful way.
+### **Statistic** is a very broad subject of study, covering from data collection (designing surveys), organizing and preparing data, and making interpretation and analysis on the data and at the end presenting and visualizing the crux of the analysis in the meaningful way.
 
-#### In this course we are going to discuss how can we clean up a given dataset, then analyze and visualize important information in it.
+  In this course we are going to discuss how can we clean up a given data-set, then analyze and visualize important information in it.
 
-<hr></hr>
+<hr>
 
-### First let's start with a quick excersise:
+### First let's start with a quick exercise:
 
 
 ```python
@@ -32,7 +44,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-#### First we need a gaussian function. We can use built-in functions in numpy for getting a gaussian function. However, let's define it ourself as an easy practice:
+First we need a Gaussian function. We can use built-in functions in numpy for getting a Gaussian function. However, let's define it ourselves as an easy practice:
 
 
 
@@ -52,7 +64,7 @@ mu, sigma = 10, 5
 prob_list = [Gaussian_prob(x, mu, sigma) for x in x_span]
 ```
 
-### Another equivalent way of doing the above but using the numpy arrays. (Be very carefull when writing a code this way, since the code above works for any object that is iterable; but, the method used below can only be applied for the **numpy array object** and **not a list**. 
+### Another equivalent way of doing the above but using the numpy arrays. (Be very careful when writing a code this way, since the code above works for any object that is iterable; but, the method used below can only be applied for the **numpy array object** and **not a list**.
 
 
 ```python
@@ -63,7 +75,7 @@ prob_np_array = Gaussian_prob(x_span, mu, sigma)
 ```python
 plt.plot(x_span, prob_list)
 
-plt.title("Guassian Disturbution for $\mu=$ {} , and $\sigma=$ {}".format(mu, sigma))
+plt.title("Gaussian Distribution for $\mu=$ {} , and $\sigma=$ {}".format(mu, sigma))
 plt.xlabel(r"x")
 plt.ylabel(r"$P(x|\mu, \sigma)$")
 
@@ -76,16 +88,16 @@ plt.show()
 
 ### **Perfect!!**
 
-#### Now that we have our guassian function let's start doing some estimation!
+ Now that we have our Gaussian function let's start doing some estimation!
 
 <hr>
 
-## **Particle X** 
+## **Particle X**
 ### What is the **True** mass of the newly discovered X particle?
 
 <hr>
 
-#### Imagine that you are a Primary investigator for one particular experiment done at the [**CERN**](https://home.cern/) (The world's most powerful particle accelerator). There was a new experiment which led to the discovery of particle X. But, there has been a lot of debate about the true mass of the particle. So, you asked **ATLAS** and **CMS** team to measure the mass of the particle completely separate from each other. (These are two separate detector at CERN) They gave you the following results for the mass and the corresponding error. (in  an unknown unit!!!)
+  Imagine that you are a Primary investigator for one particular experiment done at the [**CERN**](https://home.cern/) (The world's most powerful particle accelerator). There was a new experiment which led to the discovery of particle X. But, there has been a lot of debate about the true mass of the particle. So, you asked **ATLAS** and **CMS** team to measure the mass of the particle completely separate from each other. (These are two separate detector at CERN) They gave you the following results for the mass and the corresponding error. (in  an unknown unit!!!)
 
 
 ```python
@@ -93,9 +105,9 @@ mass_atlas, mass_err_atlas = 10.12, 3.7
 mass_cms, mass_err_cms = 7.42, 1.6
 ```
 
-#### You have too hold a news conference to announce the discovery as well as the measured mass. So, how can you find the value for the true mass of the particle? In other words, how can you find this value, using **all** the information about this two measurement?
+  You have too hold a news conference to announce the discovery as well as the measured mass. So, how can you find the value for the true mass of the particle? In other words, how can you find this value, using **all** the information about this two measurement?
 
-#### The easiest way that comes to mind is two report the average of these values:
+  The easiest way that comes to mind is two report the average of these values:
 
 
 ```python
@@ -106,39 +118,43 @@ print(mass_average)
     8.77
 
 
-#### <span style="color:red">_But there is huge problem with this analysis!!!_</span>
+  <span style="color:red">_But there is huge problem with this analysis!!!_</span>
 
-#### The lead investigator of the CMS team calls you and asks for an explanation for your decision to report the average. Since, he argues that the measurement done by ATLAS team is not as valid as CMS team since the ATLAS team have much higher uncertaintity in their experiment. But in your analysis, you are giving both these measurements the same weight by averaging them. **How can you take into account the difference in uncertaintity in your analysis?**
+  The lead investigator of the CMS team calls you and asks for an explanation for your decision to report the average. Since, he argues that the measurement done by ATLAS team is not as valid as CMS team since the ATLAS team have much higher uncertainty in their experiment. But in your analysis, you are giving both these measurements the same weight by averaging them. **How can you take into account the difference in uncertainty in your analysis?**
 
 $ X_1 $: mass_atlas, mass_err_atlas  
 $ X_2 $: mass_atlas, mass_err_atlas  
 
-#### Basically, what is the $p(m_X|X_1, X_2)$ (probability disturbution of the mass of X given two sets of measurements ($X_1, X_2$))?
+  Basically, what is the $p(m_X\|X_1, X_2)$ (probability distribution of the mass of X given two sets of measurements ($X_1, X_2$))?
 
-> “Probability is orderly opinion and inference from data is nothing other than the revision of such opinion in the light of relevant new information.” 
+> “Probability is orderly opinion and inference from data is nothing other than the revision of such opinion in the light of relevant new information.”
 >
-> -- <cite>*Eliezer S. Yudkowsky*</cite> 
+> -- <cite>*Eliezer S. Yudkowsky*</cite>
 
 ### **Thomas Bayes**' theorem to the rescue!!
-#### Luckily we can approach this problem in a Bayesian framework. Which basically let us update our belief (knowlegde/information) in a consistant way when we get new information.
+  Luckily we can approach this problem in a Bayesian framework. Which basically let us update our belief (knowledge/information) in a consistent way when we get new information.
 
 <hr>
 
-#### According to Bayes:
-####  $p(m_X|X_1, X_2) \varpropto p(X_1, X_2|m_X)$ 
-#### This is much easier to handle since we can assume some models for $ p(X_1, X_2|m_X)$. (We don't need to take care about the normalization here, we are going to get there next week)
+  According to Bayes:
+   $p(m_X\|X_1, X_2) \varpropto p(X_1, X_2\|m_X)$
+  This is much easier to handle since we can assume some models for $ p(X_1, X_2\|m_X)$. (We don't need to take care about the normalization here, we are going to get there next week)
 
 ### **First let's make some assumptions:**
-#### **1. Bayesian statistics works!**
-#### **2. The measurements are independent. $ p(X_1, X_2|m_X) = p(X_1|m_X)*p(X_1|m_X)$**
-#### **3. Measurements follow a random Gaussian disturbution. $PDF(m_{measured})=Gaussian(m_{measured}, \sigma_{measured})$**
-#### **4. We have no other information about $m_X$, so we can assume the simplest form which is uniform (tophat) probability diturbution (prior) for this quantity. (quantity that we are looking for)**
+  1. Bayesian statistics works!  
+
+  2. The measurements are independent. $p(X_1, X_2\|m_X)=p(X_1\|m_X)p(X_1\|m_X)$  
+
+  3. Measurements follow a random Gaussian distribution. $PDF(m_{measured})=Gaussian(m_{measured}, \sigma_{measured})$  
+
+  4. We have no other information about $m_X$, so we can assume the simplest form which is uniform (tophat) probability distribution (prior) for this quantity. (quantity that we are looking for)  
+
 
 <hr>
 
 ### <span style="color:#000066">**Let's calculate the $p(X_1|m_X)$ for different values of $m_X$:**</span>
 
-#### <span style="color:#000066">**Start by sampling potential values for m_X**<span>
+  <span style="color:#000066">**Start by sampling potential values for m_X**<span>
 
 
 
@@ -146,7 +162,7 @@ $ X_2 $: mass_atlas, mass_err_atlas
 m_X_span= np.arange(0, 25, 0.001)
 ```
 
-#### <span style="color:#000066">**Making two arrays of zeros for storing the probabilities**<span> 
+  <span style="color:#000066">**Making two arrays of zeros for storing the probabilities**<span>
 
 
 ```python
@@ -154,7 +170,7 @@ prob_atlas=np.zeros(len(m_X_span))
 prob_cms=np.zeros(len(m_X_span))
 ```
 
-#### <span style="color:#000066">**Building the joint pdf [p(X1, X2)]**<span> 
+  <span style="color:#000066">**Building the joint pdf [p(X1, X2)]**<span>
 
 
 ```python
@@ -163,14 +179,14 @@ for i, m in enumerate(m_X_span):
     prob_cms[i]=Gaussian_prob(mass_cms, _mu=m, _sigma=mass_err_cms)
 ```
 
-#### <span style="color:#000066">**Finding the joint disturbution**<span>
+  <span style="color:#000066">**Finding the joint distribution**<span>
 
 
 ```python
 joint_prob = prob_atlas*prob_cms
 ```
 
-#### <span style="color:#000066">**Since we use the Uniform  prior for $m_X$, it is very easy to find the normalization; we can sum over all the elements of the probability vector**<span>
+  <span style="color:#000066">**Since we use the Uniform  prior for $m_X$, it is very easy to find the normalization; we can sum over all the elements of the probability vector**<span>
 
 
 ```python
@@ -178,15 +194,15 @@ Normalization = len(m_X_span)/(sum(joint_prob)*(max(m_X_span)-min(m_X_span)))
 joint_prob_normalized = joint_prob*Normalization
 ```
 
-#### <span style="color:#000066">**Finding the mass corresponding to the highest probability. (So this is the most probable value)**<span>
+  <span style="color:#000066">**Finding the mass corresponding to the highest probability. (So this is the most probable value)**<span>
 
 
 ```python
 m_X_max_prob = m_X_span[joint_prob==max(joint_prob)]
 ```
 
-#### <span style="color:#000066">**Plotting the pdf for the two measurements + joint pdf normalized and unnormalized:**<span>
-                                                                                    
+  <span style="color:#000066">**Plotting the pdf for the two measurements + joint pdf normalized and not-normalized:**<span>
+
 
 
 ```python
@@ -196,7 +212,7 @@ plt.plot(m_X_span, prob_cms, label="CMS detector")
 plt.plot(m_X_span, joint_prob_normalized, label="Joint pdf (Normalized)")
 plt.plot(m_X_span, joint_prob, label="Joint pdf (Not normalized)")
 
-plt.title(r"Probability Disturbution Function")
+plt.title(r"Probability Distribution Function")
 plt.xlabel(r"$m_X$")
 plt.ylabel(r"Probability")
 
@@ -208,7 +224,7 @@ plt.show()
 ![png](week2_files/week2_36_0.png)
 
 
-#### <span style="color:#000066">**As you can see in the plot the joint pdf is much closer to the CMS team results rather than ATLAS team measurement; which was expected from their uncertaintities. This is the value of mass you can report:**<span>
+  <span style="color:#000066">**As you can see in the plot the joint pdf is much closer to the CMS team results rather than ATLAS team measurement; which was expected from their uncertainties. This is the value of mass you can report:**<span>
 
 
 ```python
@@ -219,7 +235,7 @@ print(m_X_max_prob)
 
 
 ### There is an analytical way of getting to the same results, since we are working with gaussian functions which have very special properties. One that we need is the following:
-#### **$Guassian(\mu_1,\sigma_1)*Guassian(\mu_2,\sigma_2)=Guassian(\frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2},\frac{\sigma_1\sigma_2}{\sqrt{\sigma_1^2+\sigma_2^2}})$**
+  **$Gaussian(\mu_1,\sigma_1)*Gaussian(\mu_2,\sigma_2)=Gaussian(\frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2},\frac{\sigma_1\sigma_2}{\sqrt{\sigma_1^2+\sigma_2^2}})$**
 
 
 ```python
