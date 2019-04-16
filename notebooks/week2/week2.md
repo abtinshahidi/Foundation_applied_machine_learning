@@ -50,7 +50,7 @@ First we need a Gaussian function. We can use built-in functions in numpy for ge
 
 ```python
 def Gaussian_prob(x, _mu=0, _sigma=1):
-    """Gaussian disturbution: probability of getting x given mu=_mu, sigma=_sigma"""
+    """Gaussian distribution: probability of getting x given mu=_mu, sigma=_sigma"""
     return (1/np.sqrt(2*np.pi*_sigma**2))*np.exp(-(x-_mu)**2/(2*_sigma**2))
 ```
 
@@ -64,7 +64,7 @@ mu, sigma = 10, 5
 prob_list = [Gaussian_prob(x, mu, sigma) for x in x_span]
 ```
 
-### Another equivalent way of doing the above but using the numpy arrays. (Be very careful when writing a code this way, since the code above works for any object that is iterable; but, the method used below can only be applied for the **numpy array object** and **not a list**.
+### Another equivalent way of doing the above but using the numpy arrays. (Be very careful when writing a code this way, since the code above works for any object that is iterable ; but, the method used below can only be applied for the **numpy array object** and **not a list**.
 
 
 ```python
