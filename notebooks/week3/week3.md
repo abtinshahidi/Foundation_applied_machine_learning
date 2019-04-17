@@ -1,3 +1,14 @@
+---
+title: "Week 3"
+collection: teaching
+type: "Online/in-Person Graduate course"
+permalink: /teaching/2019-spring-foundation-machine-learning/week3 
+venue: "University of California, Riverside, Department of Physics and Astronomy"
+date: 2019-04-16
+location: "Riverside, USA"
+---
+
+<script src="/home/abtin/Documents/personal_website/abtinshahidi.github.io/latex_hack/math-code.js"></script>
 
 # **The Foundation of Applied Machine Learning**
 ## Spring 2019
@@ -17,7 +28,7 @@
 
 
 
-<span style="color:#2227AF">In the following excersise we are going to make some **assumption about data**, **make a model**, and **fit the parameters of the model**:</span>
+<span style="color:#2227AF">In the following exercise we are going to make some **assumption about data**, **make a model**, and **fit the parameters of the model**:</span>
 
 # **Flip A Coin: Is this Coin Really Fair?**
 
@@ -38,26 +49,26 @@ data_array = [ 6,  7,  8, 11,  8,  7,  8,  9,  8,  5, 12,  7,  5,  8,  8,  8, 10
                7,  9,  7,  7, 12,  9, 11,  6,  5,  9,  7,  9,  7, 11,  8]
 ```
 
-First we need to come up with a model for the data. We need to find the probabilty of each outcome first, before getting into the estimation for fairness. Let's ask a simple questions: **What are the possible outcomes of a coin toss?** 
+First we need to come up with a model for the data. We need to find the probability of each outcome first, before getting into the estimation for fairness. Let's ask a simple questions: **What are the possible outcomes of a coin toss?**
 
 <span style="color:#cc0000">_The answer is:_ (Head, tail) or (0,1) or (True, False) or (win, lose)</span>
 
-So, if we assume that the probabilty of getting 1 is $p$ and $p$ is not going to change throughout the experiment. Also, by defintion the probability of getting 0 is $q=1-p$. ($p$ is a quantity we are looking for, since it is a measure for the fairness of the coin)
+So, if we assume that the probability of getting 1 is $p$ and $p$ is not going to change throughout the experiment. Also, by definition the probability of getting 0 is $q=1-p$. ($p$ is a quantity we are looking for, since it is a measure for the fairness of the coin)
 
 Let's say that we are going to toss the coins $N$ times and we get $n$ desired outcome. (e.g. **Head** is the desired outcome)
 
 
-But, what are the chances of getting $n$ out of $N$ coin tosses? 
+But, what are the chances of getting $n$ out of $N$ coin tosses?
 
-$n$ desired outcome probability is $p^n$; also we have $N-n$ undesired outcome during the experiment which means that the total probabilty of getting $n$ 1s and $N-n$ 0s is $p^n q^{N-n}$
+$n$ desired outcome probability is $p^n$; also we have $N-n$ undesired outcome during the experiment which means that the total probability of getting $n$ 1s and $N-n$ 0s is $p^n q^{N-n}$
 
 Also, we do not care about the **order** of the coin toss. (e.g. (1,0,0,0,1), (0,1,1,0,0), (1,1, 0, 0, 0) all are considered same outcome)
-So, we need to multiply the previous probabilty by number of configurations. (Number of ways you can choose $n$ ones, and $N-n$ zeros; which is:  $\binom {N}{n}$
+So, we need to multiply the previous probability by number of configurations. (Number of ways you can choose $n$ ones, and $N-n$ zeros; which is:  $\binom {N}{n}$
 
-So the probability of the $n$ heads out of $N$ coin toss, when the probability of single **head** is $p$, is the following: 
+So the probability of the $n$ heads out of $N$ coin toss, when the probability of single **head** is $p$, is the following:
 
 \begin{equation}
-p(n|N,p)=\binom {N}{n} p^n (1-p)^{N-n} 
+p(n|N,p)=\binom {N}{n} p^n (1-p)^{N-n}
 \end{equation}
 
 Which is called the [**binomial distribution**](https://en.wikipedia.org/wiki/Binomial_distribution).
@@ -81,14 +92,14 @@ plt.rc('font', family='serif')
 def binomial(n=0, N=1, p=1):
     """
     This is the probability mass function for the binomial distribution.
-    
+
     INPUT:
             n: Number of desired outcome
             N: Number of trials
             p: Probability of a desired outcome for each separate coin toss
-            
+
     OUTPUT:
-            Probability of getting n desired outcome, out of N trials, when the probality of desired outcome is p 
+            Probability of getting n desired outcome, out of N trials, when the probality of desired outcome is p
     """
     from math import factorial
     factor = factorial(N)/(factorial(n)*factorial(N-n))
@@ -105,7 +116,7 @@ number_of_points = 10**5
 prior_p = np.linspace(0,1, number_of_points)
 ```
 
-<span style="color:	#00008B">Impoting time() for getting a benchmark for different methods:</span>
+<span style="color:	#00008B">Importing time() for getting a benchmark for different methods:</span>
 
 
 ```python
@@ -114,7 +125,7 @@ from time import time
 
 ### **A simple for loop:**
 
-In the following cell, we are going to calculate the probablity of getting all the values in the data-set, while using differnt $p$. Since, we can assume that the experiments are independent, we can simply multiply all the probabilities. Then looking for the $p$ value which maximize that probability; or in other words, is the most likely value for $p$ given our data-set. 
+In the following cell, we are going to calculate the probability of getting all the values in the data-set, while using different $p$. Since, we can assume that the experiments are independent, we can simply multiply all the probabilities. Then looking for the $p$ value which maximize that probability; or in other words, is the most likely value for $p$ given our data-set.
 
 You should notice that we are using the **Bayes' law** again; we are looking for $P(p|X)$ in which $X$ is the whole data-set. But, we can turn that around and look for much simpler quantity, using Bayes' law: $P(p|X) \sim P(X|p)$
 
@@ -135,7 +146,7 @@ tf=time()-ti
 print("For loop method for {} data points and {} simulations (sampling p) takes: {:10.3f} seconds ".format(len(data_array), number_of_points, tf))
 ```
 
-    For loop method for 100 data points and 100000 simulations (sampling p) takes:     23.881 seconds 
+    For loop method for 100 data points and 100000 simulations (sampling p) takes:     23.881 seconds
 
 
 <span style="color:	#00008B">This is the most likely value according to the description above.</span>
@@ -172,11 +183,11 @@ for i,p in enumerate(prior_p):
     prob_p_cat[i] = np.prod(vec_binomial(data_array, N, p))
 tf=time()-ti
 
-    
+
 print("numpy.vectorize method for {} data points and {} simulations (sampling p) takes: {:10.3f} seconds ".format(len(data_array), number_of_points, tf))
 ```
 
-    numpy.vectorize method for 100 data points and 100000 simulations (sampling p) takes:     17.599 seconds 
+    numpy.vectorize method for 100 data points and 100000 simulations (sampling p) takes:     17.599 seconds
 
 
 
@@ -191,7 +202,7 @@ prior_p[prob_p_cat==max(prob_p_cat)]
 
 
 
-You can see that the numpy.vectorize method is a little bit **faster** than the simple for loop. 
+You can see that the numpy.vectorize method is a little bit **faster** than the simple for loop.
 
 
 ```python
@@ -266,18 +277,18 @@ plt.show()
 ![png](week3_files/week3_26_0.png)
 
 
-So if we somehow manage to find the blue area we can find the numerical value for $\pi$. 
+So if we somehow manage to find the blue area we can find the numerical value for $\pi$.
 
 \begin{align*}
 & S = \frac{\pi R^2}{4} = \frac{\pi}{4} \quad \textrm{Since we know $R=1$} \\
 & \pi = 4S \quad \textrm{So we need S}
 \end{align*}
 
-### <span style="color:	#E52B1D">How can we find the area numerically?</span> 
+### <span style="color:	#E52B1D">How can we find the area numerically?</span>
 
 First we need to get familiar with the [**Monte Carlo Simulations**](https://en.wikipedia.org/wiki/Monte_Carlo_method)
 
-The **Monte Carlo** simulations, is a statistical technique to model stochastic (or probabilistic) systems and to find the probability of different outcome. 
+The **Monte Carlo** simulations, is a statistical technique to model stochastic (or probabilistic) systems and to find the probability of different outcome.
 
 Further references:
 [http://mathworld.wolfram.com/MonteCarloMethod.html](http://mathworld.wolfram.com/MonteCarloMethod.html)
@@ -309,8 +320,8 @@ circle_points = distance_from_0_0[distance_from_0_0<=1]
 
 Now we have an array of distances for points inside the circle ($d((x,y), (0,0)) \leq 1$):
 
-If we define $n$ to be the number of points within circle, and $N$ to be total nummber of points,
-We can find the area to be: 
+If we define $n$ to be the number of points within circle, and $N$ to be total number of points,
+We can find the area to be:
 
 \begin{equation*}
 S = \frac{n}{N}
@@ -328,7 +339,7 @@ print(PI)
 
 As you can see we are getting close to the **True value**.
 
-Let's put the above procedures inside a function: 
+Let's put the above procedures inside a function:
 
 
 ```python
@@ -342,11 +353,11 @@ def our_PI_generator(N=10e5):
     y = np.random.random(N)
     # Find the distance of (x,y) from [0,0]
     distance_from_0_0 = np.sqrt(x**2 + y**2)
-    # imposing the condition for the circle:  distance((x,y),(0,0))<= 0 
+    # imposing the condition for the circle:  distance((x,y),(0,0))<= 0
     circle_points = distance_from_0_0[distance_from_0_0<=1]
     return 4 * len(circle_points)/N
-    
-    
+
+
 ```
 
 
@@ -418,14 +429,14 @@ Let's put the selection criteria of the circle inside a function. (This can be g
 ```python
 def impose_circle(distances, radius=1):
     """
-    This is the function that takes an array `[distances]` and a number (radius) and output an array 
-    of the similar size, and for those value<radius, assignes 1 and the rest 0
+    This is the function that takes an array `[distances]` and a number (radius) and output an array
+    of the similar size, and for those value<radius, assigns 1 and the rest 0
     """
     try:
         lenght_of_array = len(distances)
     except TypeError:
         lenght_of_array = 1
-        
+
     selector=np.zeros(lenght_of_array)
     for i in range(lenght_of_array):
         if distances[i]<=radius:
@@ -433,7 +444,7 @@ def impose_circle(distances, radius=1):
     return selector
 ```
 
-Now let's devide our points into two dictionaries: `inside_points` and `outside_points` 
+Now let's divide our points into two dictionaries: `inside_points` and `outside_points`
 
 
 ```python
@@ -533,7 +544,7 @@ y_1= np.ones(N)-y
 dis1=np.sqrt(x_1**2+y_1**2)
 ```
 
-Now that we have our points let's apply the criterias:
+Now that we have our points let's apply the criteria:
 
 
 ```python
