@@ -59,7 +59,7 @@
 In the \href{https://abtinshahidi.github.io/teaching/2019-spring-foundation-machine-learning/week3}{week3} course, we discussed how can we find the $\pi$ by just sampling random data points on a square and how to just find the ratio of points inside a circle to total number of generate points. In this week you are going to find the $\pi$ through solving the Buffon's needle problem:
 
 \subsection*{Buffon's needle}
-This problem asked by a French mathematician named \href{https://en.wikipedia.org/wiki/Georges-Louis_Leclerc,_Comte_de_Buffon}{Georges-Louis Leclerc, Comte de Buffon} in the $18^{th}$ century. Imagine that you have an striped plane as you can see in the picture below and you are throwing a needle on this plane completely randomly. What is the probability of the needle to land fully on a single shade/color. There are two way to approach this problem:
+This problem was proposed by a French mathematician named \href{https://en.wikipedia.org/wiki/Georges-Louis_Leclerc,_Comte_de_Buffon}{Georges-Louis Leclerc, Comte de Buffon} in the $18^{th}$ century. Imagine that you have an striped plane as you can see in the picture below and you are throwing a needle on this plane completely randomly. What is the probability of the needle to land fully on a single shade/color. There are two main ways to approach this problem:
 
 \begin{figure}[ht]
 \begin{center}
@@ -69,7 +69,7 @@ This problem asked by a French mathematician named \href{https://en.wikipedia.or
 \end{figure}
 
 \subsubsection*{Analytic approach:}
-For finding the probability let's name stuff, assign probability distribution and possibly integral!
+For finding the probability let's name stuff, assign probability distribution and possibly taking some integral!
 
 Let the needle length be $l$ and the strip width be $t$. There are two random variables that will determine this probability let's say our random variables are $\theta$ which is the angle of the needle from the direction of strips and $x$ which is the $x$-position of the needles center from the nearest line (this is the one we care each time we drop the needle). Now that we defined our random variables let's assign probability density to them, and since they are two \textbf{independent} variables and they are totally \textbf{random}, we have: 
 
