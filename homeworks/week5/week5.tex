@@ -1,0 +1,74 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\usepackage{enumitem}
+
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=cyan,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{PHYS 243}
+\newcommand\hwnumber{5}                  % <-- homework number
+\newcommand\MyName{TA: Abtin Shahidi}           % <-- My name
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\MyName}
+
+\chead{\textbf{\Large Homework \hwnumber}}
+\rhead{\course \\ Deadline:  06/12/2019, 11:59 pm}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+\section*{Find the income using Support Vector Machines!}
+From the link to \href{https://abtinshahidi.github.io/files/adult.zip}{adult.zip} download the data set. First, take a look at the data. You can see that the data contains categorical data as well. First of run a \textbf{random forests} and \textbf{measure your performance}. 
+
+
+\subsection*{Transform Categorical data into numbers!}
+ Now that we have more complicated algorithm, let's make use out of them. But first you should change your categorical data into real valued number which are needed for the SVM algorithm. Come up with a method that can do this translation. 
+
+\subsection*{Scale your attributes!}
+ Now that you have numerical attributes, scale all your features to something reasonable.
+ 
+
+\subsection*{Run Support Vector Machine!}
+Now that you preprocessed your data, you can run the algorithm and measure your performance. Compare your results to the random forest performance on the same task.
+
+\end{document}
+
+
