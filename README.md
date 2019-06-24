@@ -32,3 +32,6 @@ The available notebooks:
 
 
 * [Week 7 notebook: Machine Learning: Decision Trees, Random Forests, Support Vector Machine](https://github.com/abtinshahidi/Foundation_applied_machine_learning/blob/master/notebooks/week7/week7.ipynb)
+
+
+* [Week 8 notebook: Machine Learning: Neural networks](https://github.com/abtinshahidi/Foundation_applied_machine_learning/blob/master/notebooks/week8/week8.ipynb)
