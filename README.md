@@ -1,6 +1,6 @@
 # Additional information about the course:
 
-Course website: [Foundation of Applied Machine Learning](https://abtinshahidi.github.io/teaching/2019-spring-foundation-machine-learning)
+Course website: [Foundation of Applied Machine Learning](https://abtinshahidi.github.io/teaching/2019-summer-foundation-machine-learning)
 
 ### There is a requirement file inside the directory named requirement_ML.txt; which include all the dependencies needed to run the notebooks in the [jupyter-lab](https://github.com/jupyterlab/jupyterlab)
 
