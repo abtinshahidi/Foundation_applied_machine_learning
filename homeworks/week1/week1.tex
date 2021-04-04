@@ -16,14 +16,14 @@
   linkcolor=blue,
   linkbordercolor={0 0 1}
 }
- 
+
 \renewcommand\lstlistingname{Algorithm}
 \renewcommand\lstlistlistingname{Algorithms}
 \def\lstlistingautorefname{Alg.}
 
 \lstdefinestyle{Python}{
     language        = Python,
-    frame           = lines, 
+    frame           = lines,
     basicstyle      = \footnotesize,
     keywordstyle    = \color{blue},
     stringstyle     = \color{green},
@@ -36,14 +36,12 @@
 % Edit these as appropriate
 \newcommand\course{PHYS 243}
 \newcommand\hwnumber{1}                  % <-- homework number
-\newcommand\MyName{TA: Abtin Shahidi}           % <-- My name
 
 \pagestyle{fancyplain}
 \headheight 35pt
-\lhead{\MyName}
+\lhead{\textbf{\Large Homework \hwnumber}}
 
-\chead{\textbf{\Large Homework \hwnumber}}
-\rhead{\course \\ Deadline: June 29, 2019}
+\rhead{\course \\ Deadline: April 18, 2021, at 23:59}
 \lfoot{}
 \cfoot{}
 \rfoot{\small\thepage}
@@ -51,13 +49,13 @@
 
 \begin{document}
 
-Welcome again to the \textbf{Foundation of applied machine learning}! 
+Welcome again to the \textbf{Foundation of applied machine learning}!
 
 \section*{Problem 1: Python programming}
-This is a problem to check your coding skills! So \textbf{do not use} fancy modules and scripts!  
+This is a problem to check your coding skills! So \textbf{do not use} fancy modules and scripts!
 
 \subsection*{Production of Fibonacci Sequence!}
-I have been assigned to write a function that takes an integer value $n$, where $n\in [0,1,2,3,...]$ and return the $n^{th}$ value in Fibonacci sequence. Since, I am very lazy I just wrote the function \textbf{recursively} as you can see below. Another person, who was assigned to do the same thing, wrote the function with \textsc{for loops} and claims his code is much faster!! 
+I have been assigned to write a function that takes an integer value $n$, where $n\in [0,1,2,3,...]$ and return the $n^{th}$ value in Fibonacci sequence. Since, I am very lazy I just wrote the function \textbf{recursively} as you can see below. Another person, who was assigned to do the same thing, wrote the function with \textsc{for loops} and claims his code is much faster!!
 
     \lstset{caption={Recursive Fibonacci Function}}
     \lstset{label={lst:alg1}}
@@ -85,9 +83,9 @@ I have been assigned to write a function that takes an integer value $n$, where 
     \begin{lstlisting}[style = Python]
     import time
     # if you run this, the current time in (s) will be recorded in  x
-    x=time.time() 
+    x=time.time()
     \end{lstlisting}
-    
+
     \lstset{caption={Timer Function}}
    \lstset{label={lst:alg3}}
     \begin{lstlisting}[style = Python]
@@ -96,7 +94,7 @@ I have been assigned to write a function that takes an integer value $n$, where 
     	return average_time
     \end{lstlisting}
   \item
-   \textbf{Part 4:} Make a plot in which the $x$-axis is the value of the input function $n$ and the $y$-axis is the average time (output of the previous function), for both recursive and non-recursive Fibonacci. (Both in the same plot; also use matplotlib package for making the plots) 
+   \textbf{Part 4:} Make a plot in which the $x$-axis is the value of the input function $n$ and the $y$-axis is the average time (output of the previous function), for both recursive and non-recursive Fibonacci. (Both in the same plot; also use matplotlib package for making the plots)
 \end{enumerate}
 
 
@@ -105,24 +103,24 @@ I have been assigned to write a function that takes an integer value $n$, where 
 Given the Matrix below answer the questions:
 
 \begin{equation*}
-   M = \begin{pmatrix} 
+   M = \begin{pmatrix}
 1 & -4 & 2 \\
 -4 & 1 & -2 \\
-2 & -2 & -2 
+2 & -2 & -2
 \end{pmatrix}
 \end{equation*}
 
 
     \item \textbf{Part 1:} Find the determinant, transpose, inverse(if exist) for $M$.
 
-    \item \textbf{Part 2:} Find the eigenvalues and eigenvectors for $M$. 
-      
+    \item \textbf{Part 2:} Find the eigenvalues and eigenvectors for $M$.
+
     \item \textbf{Part 3:} Find the Gradient if the $\nabla_A f(A)$ for the following:
    \begin{equation*}
-	A=\begin{pmatrix} 
+	A=\begin{pmatrix}
 	x_{11} & x_{12} & x_{13} \\
 	x_{21} & x_{22} & x_{23} \\
-	x_{31} & x_{32} & x_{33} 
+	x_{31} & x_{32} & x_{33}
 	\end{pmatrix}
   \end{equation*}
   \begin{equation*}
@@ -133,11 +131,12 @@ Given the Matrix below answer the questions:
    \begin{equation*}
 	g(x,y,z)=x^3y+yz\sin(x)+xy^2z^5
   \end{equation*}
-   	
+
 \section*{Problem 3: Machine Learning}
- \item \textbf{Part 1:} Explain the difference between validation and test samples. 
+ \item \textbf{Part 1:} Explain the difference between validation and test samples.
 
- \item \textbf{Part 2:} Explain the difference between supervised and unsupervised learning algorithm. 
+ \item \textbf{Part 2:} Explain the difference between supervised and unsupervised learning algorithm.
 
+ \item \textbf{Part :} Define optimization and describe its relationship with Machine Learning.
 
 \end{document}
