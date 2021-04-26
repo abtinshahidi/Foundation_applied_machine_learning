@@ -1,0 +1,15 @@
+Dataset:  birthrate.dat
+
+Source: R. Weintraub (1962). "The Birth Rate and Economic Development:
+      An Empirical Study", Econometrica, Vol. 40, #4, pp 812-817.
+
+Description: Birth Rates, per capita income, proportion (ratio?) of 
+population in farming, and infant mortality during early 1950s for
+30 nations.
+
+Variables:
+Nation   
+Birth Rate 
+Per Capita Income    
+Proportion of population on farms   
+Infant Mortality Rate   
