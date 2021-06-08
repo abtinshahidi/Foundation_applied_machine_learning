@@ -11,8 +11,8 @@ Attribute Information
 10) oldpeak = ST depression induced by exercise relative to rest
 11) the slope of the peak exercise ST segment
 12) number of major vessels (0-3) colored by flourosopy
-13) thal: 0 = normal; 1 = fixed defect; 2 = reversable defect
-14) target: 0= less chance of heart attack 1= more chance of heart attack
+13) thal: 3 = normal; 6 = fixed defect; 7 = reversable defect
+14) target: 1= less chance of heart attack 2= more chance of heart attack
 
 age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,target
 70,1,4,130,322,0,2,109,0,2.4,2,3,3,2
